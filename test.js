@@ -37,6 +37,7 @@ describe('Node App Tests', () => {
 });
 
 // secret.test.js
+const { expect } = require('chai');
 
 describe('SECRET_KEY environment variable', () => {
 
@@ -49,7 +50,7 @@ describe('SECRET_KEY environment variable', () => {
       console.log("SECRET_KEY does NOT exist!");
     }
 
-    expect(process.env.SECRET_KEY).toBeUndefined(); // Jest assertion
+    expect(process.env.SECRET_KEY).to.be.undefined;
   });
 
   it('should exist if set', () => {
@@ -61,7 +62,8 @@ describe('SECRET_KEY environment variable', () => {
       console.log("SECRET_KEY does NOT exist!");
     }
 
-    expect(process.env.SECRET_KEY).toBeDefined(); // Jest assertion
+    expect(process.env.SECRET_KEY).to.not.be.undefined;
+    expect(process.env.SECRET_KEY).to.equal("mytestsecret");
   });
 
 });
