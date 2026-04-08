@@ -37,7 +37,6 @@ describe('Node App Tests', () => {
 });
 
 // secret.test.js
-const { expect } = require('chai');
 
 describe('SECRET_KEY environment variable', () => {
 
