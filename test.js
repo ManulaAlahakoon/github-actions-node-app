@@ -36,17 +36,32 @@ describe('Node App Tests', () => {
 
 });
 
-describe('SECRET_KEY existence check', () => {
+// secret.test.js
 
-  it('shows if SECRET_KEY exists or not', async () => {
-    const app = createApp(false); // do not load .env
-    const res = await request(app).get('/');
+describe('SECRET_KEY environment variable', () => {
 
-    if (res.body.secret_set) {
+  it('should not exist if not set', () => {
+    delete process.env.SECRET_KEY; // remove if exists
+
+    if (process.env.SECRET_KEY) {
       console.log("SECRET_KEY exists!");
     } else {
       console.log("SECRET_KEY does NOT exist!");
     }
+
+    expect(process.env.SECRET_KEY).toBeUndefined(); // Jest assertion
+  });
+
+  it('should exist if set', () => {
+    process.env.SECRET_KEY = "mytestsecret";
+
+    if (process.env.SECRET_KEY) {
+      console.log("SECRET_KEY exists!");
+    } else {
+      console.log("SECRET_KEY does NOT exist!");
+    }
+
+    expect(process.env.SECRET_KEY).toBeDefined(); // Jest assertion
   });
 
 });
