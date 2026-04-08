@@ -10,9 +10,6 @@ describe('Node App Tests', () => {
     const app = createApp(false); // do NOT load .env in test
     const res = await request(app).get('/');
 
-    // ✅ log result in CI / console
-    console.log("SECRET_KEY test result (should be false):", res.body.secret_set);
-
     expect(res.status).to.equal(200);
     expect(res.body.secret_set).to.equal(false);
   });
@@ -22,9 +19,6 @@ describe('Node App Tests', () => {
 
     const app = createApp(false); // do not reload .env
     const res = await request(app).get('/');
-
-    // ✅ log result in CI / console
-    console.log("SECRET_KEY test result (should be true):", res.body.secret_set);
 
     expect(res.status).to.equal(200);
     expect(res.body.secret_set).to.equal(true);
@@ -38,6 +32,21 @@ describe('Node App Tests', () => {
 
     expect(res.status).to.equal(200);
     expect(res.body.status).to.equal("OK");
+  });
+
+});
+
+describe('SECRET_KEY existence check', () => {
+
+  it('shows if SECRET_KEY exists or not', async () => {
+    const app = createApp(false); // do not load .env
+    const res = await request(app).get('/');
+
+    if (res.body.secret_set) {
+      console.log("SECRET_KEY exists!");
+    } else {
+      console.log("SECRET_KEY does NOT exist!");
+    }
   });
 
 });
