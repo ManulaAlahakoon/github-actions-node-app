@@ -9,6 +9,12 @@ function createApp(loadEnv = true) {
 
   const SECRET_KEY = process.env.SECRET_KEY;
 
+  if (!process.env.SECRET_KEY) {
+  throw new Error("FATAL ERROR: SECRET_KEY is not set!"); // crash here
+  }
+  
+  
+
   app.get('/', (req, res) => {
     res.json({
       message: "Node app is running",
