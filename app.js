@@ -11,7 +11,7 @@ function createApp(loadEnv = true) {
 
   app.get('/', (req, res) => {
     res.json({
-      message: "Node app is running...",
+      message: "Node app is running",
       secret_set: SECRET_KEY ? true : false
     });
   });
